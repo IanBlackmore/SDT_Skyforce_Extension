@@ -48,13 +48,15 @@ public class gameSetUp implements Runnable{
     }
     public void init(){//initialize
     	
-    	
+    	Settings.render();
         display = new Display(title,width,height);
         loadImage.init();
         manager = new gameManager();
         manager.init();
         //start = true;  
         Settings.render();
+        
+        
         
         
     }

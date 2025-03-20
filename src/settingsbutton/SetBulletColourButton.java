@@ -9,13 +9,13 @@ import javax.swing.JButton;
 
 import settings.Settings;
 
-public class SetPlayerColourButton implements SettingsButton {
+public class SetBulletColourButton implements SettingsButton {
 	JButton button;
 	ArrayList <Color> colourList = new ArrayList <Color>();
 	int currentColour;
 	
-	public SetPlayerColourButton() {
-		button = new JButton("Set Player Colour");
+	public SetBulletColourButton() {
+		button = new JButton("Set Bullet Colour");
 		currentColour = 0;
 		colourList.add(Color.blue);
 		colourList.add(Color.cyan);
@@ -26,8 +26,8 @@ public class SetPlayerColourButton implements SettingsButton {
 	
 	@Override
 	public void execute() {
-		Settings.setPlayerColour(colourList.get(currentColour%colourList.size()));
-		System.out.println("Current player colour: " + colourList.get(currentColour%colourList.size()).toString());
+		Settings.setBulletColour(colourList.get(currentColour%colourList.size()));
+		System.out.println("Current bullet colour: " + colourList.get(currentColour%colourList.size()).toString());
 		currentColour++;
 	}
 

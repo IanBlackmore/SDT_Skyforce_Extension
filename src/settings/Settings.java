@@ -1,7 +1,6 @@
 package settings;
 
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -10,14 +9,11 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-import java.awt.Canvas;
-
 import farisa_bullet.Bullet;
 import farisa_enemies.Enemy;
 import farisa_entity.Player;
 import farisa_setUp.gameSetUp;
-import settingsbutton.SetPlayerColourButton;
-import settingsbutton.SettingsButton;
+import settingsbutton.*;
 
 public class Settings {
 	static Color playerColour = Color.red;
@@ -73,10 +69,16 @@ public class Settings {
 	
 	public static void render() {
 		frame = new JFrame("Settings");
-		JButton exitButton = new JButton("Exit");
+		JButton exitButton = new JButton("Exit Settings Menu");
 		buttonList = new ArrayList<SettingsButton>();
-		SettingsButton b = new SetPlayerColourButton();
-		buttonList.add(b);
+		SettingsButton playerColour = new SetPlayerColourButton();
+		SettingsButton bulletColour = new SetBulletColourButton();
+		SettingsButton backgroundColour = new SetBackgroundColourButton();
+		SettingsButton enemyColour = new SetEnemyColourButton();
+		buttonList.add(playerColour);
+		buttonList.add(bulletColour);
+		buttonList.add(backgroundColour);
+		buttonList.add(enemyColour);
         exitButton.setBounds(100, 100, 200, 100);
         exitButton.addActionListener(new ActionListener() {
         	@Override

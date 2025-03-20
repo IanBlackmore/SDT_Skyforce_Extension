@@ -9,26 +9,27 @@ import javax.swing.JButton;
 
 import settings.Settings;
 
-public class SetPlayerColourButton implements SettingsButton {
+public class SetBackgroundColourButton implements SettingsButton {
 	JButton button;
 	ArrayList <Color> colourList = new ArrayList <Color>();
 	int currentColour;
 	
-	public SetPlayerColourButton() {
-		button = new JButton("Set Player Colour");
+	public SetBackgroundColourButton() {
+		button = new JButton("Set Background Colour");
 		currentColour = 0;
 		colourList.add(Color.blue);
 		colourList.add(Color.cyan);
 		colourList.add(Color.black);
-		colourList.add(Color.red);
+		colourList.add(Color.white);
 		button.setBounds(300, 300, 100, 100);
 	}
 	
 	@Override
 	public void execute() {
-		Settings.setPlayerColour(colourList.get(currentColour%colourList.size()));
-		System.out.println("Current player colour: " + colourList.get(currentColour%colourList.size()).toString());
+		Settings.setBackgroundColour(colourList.get(currentColour%colourList.size()));
+		System.out.println("Current background colour: " + colourList.get(currentColour%colourList.size()).toString());
 		currentColour++;
+		
 	}
 
 	@Override
