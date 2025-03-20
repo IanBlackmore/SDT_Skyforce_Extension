@@ -20,6 +20,8 @@ public class Bullet {
     public static final int bulletWidth = 6;
     public static final int bulletHeight = 10;
     
+    private static Color bulletColour = Color.blue;
+    
     public Bullet(int x, int y){
         this.x = x;
         this.y = y;
@@ -37,8 +39,11 @@ public class Bullet {
         return x;
     }
     public void render(Graphics g){
-        g.setColor(Color.blue);//bullet color is set as blue
+        g.setColor(bulletColour);//bullet color is set
         g.fillRect(x, y, bulletWidth, bulletHeight);//bullet size
     }
     
+    public static void setColour(Color c) {
+    	bulletColour = c;
+    }
 }

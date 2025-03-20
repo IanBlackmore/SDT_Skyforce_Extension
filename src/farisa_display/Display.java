@@ -10,9 +10,12 @@
 package farisa_display;
 
 import javax.swing.JFrame;
+import javax.swing.WindowConstants;
+
 import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.event.WindowAdapter;
 
 public class Display {
  
@@ -45,10 +48,11 @@ public class Display {
         canvas.setFocusable(false);
         frame.add(canvas);
         frame.pack();
-        
+        frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
     }
     
     public Canvas getCanvas(){//get method to use private Canvas veriable in other class
         return canvas;
     }
+    
 }

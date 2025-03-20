@@ -13,6 +13,8 @@ import static farisa_enemies.Enemy.enemyWidth;
 import farisa_entity.Player;
 import static farisa_entity.Player.playerWidth;
 import farisa_setUp.gameSetUp;
+import settings.Settings;
+
 import java.awt.Graphics;
 import java.util.ArrayList;
 import java.util.Random;
@@ -43,6 +45,7 @@ public class gameManager {
         health = player.getHealth();
         
     }
+    
     
     public void tick(){
         player.tick();
@@ -125,5 +128,8 @@ public class gameManager {
             }
         }
     }
-    
+ 
+    public boolean getExit() {
+    	return player.getExit();
+    }
 }

@@ -6,10 +6,7 @@
 package farisa_main;
 
 import farisa_setUp.gameSetUp;
-/**
- *
- * @author Mehedi Hasan Akash
- */
+
 public class Main {
 	//
 

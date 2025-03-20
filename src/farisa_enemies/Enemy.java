@@ -17,6 +17,7 @@ public class Enemy {
     public int y;
     public static final int enemyWidth = 25;
     public static final int enemyHeight = 25;
+    private static Color enemyColour = Color.cyan;
     
     public Enemy(int x, int y){
         this.x = x;
@@ -27,7 +28,7 @@ public class Enemy {
         y += 1;
     }
     public void render(Graphics g){
-        g.setColor(Color.cyan);
+        g.setColor(enemyColour);
         g.fillOval(x, y, enemyWidth, enemyHeight);
     }
     
@@ -36,6 +37,9 @@ public class Enemy {
     }
     public int getY(){
         return y;
+    }
+    public static void setColour(Color c) {
+    	enemyColour = c;
     }
     
 }

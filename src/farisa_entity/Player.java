@@ -9,6 +9,8 @@ import farisa_bullet.Bullet;
 import static farisa_bullet.Bullet.bulletWidth;
 import farisa_display.Display;
 import farisa_manager.gameManager;
+import farisa_setUp.gameSetUp;
+
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.event.KeyEvent;
@@ -29,6 +31,9 @@ public class Player implements KeyListener {
     private long current;//for bullet time
     private long delay;
     private int health;
+    
+    private static Color playerColour = Color.red;
+	private boolean exit = false;
     
     
     public Player(int x, int y){
@@ -66,30 +71,36 @@ public class Player implements KeyListener {
     }
     public void render(Graphics g){
         if(!(health<=0)){
-        g.setColor(Color.red);
+        g.setColor(playerColour);
         g.fillRect(x, y, playerWidth, playerHeight);
     }
     }
     
     public void keyPressed(KeyEvent e){// to get codes of pressed key
         int source = e.getKeyCode();
-        if(source == KeyEvent.VK_LEFT){
+        // I am annoyed that I have to use arrow keys. I'm changing this
+        if(source == KeyEvent.VK_LEFT || source == KeyEvent.VK_A){
             left = true;
         }
-        if(source == KeyEvent.VK_RIGHT){
+        if(source == KeyEvent.VK_RIGHT || source == KeyEvent.VK_D){
             right = true;
         }
         if(source == KeyEvent.VK_SPACE){//to fire
             fire = true;
         }
+        // added exit condition because I felt like it
+        if(source == KeyEvent.VK_ESCAPE){
+            exit  = true;
+        }
         
     }
     public void keyReleased(KeyEvent e){
         int source = e.getKeyCode();
-        if(source == KeyEvent.VK_LEFT){
+        // see keyPressed() for why this got changed too
+        if(source == KeyEvent.VK_LEFT || source == KeyEvent.VK_A){
             left = false;
         }
-        if(source == KeyEvent.VK_RIGHT){
+        if(source == KeyEvent.VK_RIGHT || source == KeyEvent.VK_D){
             right = false;
         }
         if(source == KeyEvent.VK_SPACE){//to stop firing
@@ -98,7 +109,7 @@ public class Player implements KeyListener {
         
     }
     public void keyTyped(KeyEvent e){
-        
+    	
     }
     
     public int getX(){
@@ -112,5 +123,12 @@ public class Player implements KeyListener {
     }
     public void setHealth(int health){//setter method to set value of health from other classes
         this.health = health;
+    }
+    
+    public static void setPlayerColour(Color c) {
+    	playerColour = c;
+    }
+    public boolean getExit() {
+    	return exit;
     }
 }
