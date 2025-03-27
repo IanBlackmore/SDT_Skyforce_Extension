@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 import javax.swing.JButton;
+import javax.swing.JTextField;
 
 import settings.Settings;
 
@@ -13,6 +14,7 @@ public class SetBulletColourButton implements SettingsButton {
 	private JButton button;
 	private ArrayList <Color> colourList = new ArrayList <Color>();
 	private int currentColour;
+	JTextField textField;
 	
 	public SetBulletColourButton() {
 		button = new JButton("Set Bullet Colour");
@@ -29,13 +31,19 @@ public class SetBulletColourButton implements SettingsButton {
                 execute();
             }
         });
+		textField = new JTextField("Current Bullet Colour");
+		textField.setForeground(colourList.get(currentColour));
+		textField.setEditable(false);
+		Settings.addTextToPanel(textField);
 	}
 	
 	@Override
 	public void execute() {
+		currentColour++;
 		Settings.setBulletColour(colourList.get(currentColour%colourList.size()));
 		System.out.println("Current bullet colour: " + colourList.get(currentColour%colourList.size()).toString());
-		currentColour++;
+		textField.setForeground(colourList.get(currentColour%colourList.size()));
+		
 	}
 
 	@Override

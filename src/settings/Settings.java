@@ -5,6 +5,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
+import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -70,21 +71,20 @@ public class Settings {
 	
 	
 	public static void init() {
+		panel = new JPanel();
+		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
 		buttonList = new ArrayList<SettingsButton>();
+		
 		SettingsButton playerColour = new SetPlayerColourButton();
 		SettingsButton bulletColour = new SetBulletColourButton();
 		SettingsButton backgroundColour = new SetBackgroundColourButton();
 		SettingsButton enemyColour = new SetEnemyColourButton();
+		
 		buttonList.add(playerColour);
 		buttonList.add(bulletColour);
 		buttonList.add(backgroundColour);
 		buttonList.add(enemyColour);
-		panel = new JPanel();
-	}
-	
-	public static void render() {
-		
-		frame = new JFrame("Settings");
+		addAllButtonsToFrame();
 		JButton exitButton = new JButton("Exit Settings Menu");
 		
         exitButton.setBounds(100, 100, 200, 100);
@@ -95,12 +95,12 @@ public class Settings {
                 exitButtonClicked(e);
             }
         });
-        
-  
-        
-		addAllButtonsToFrame();
 		panel.add(exitButton);
-    
+	}
+	
+	public static void render() {
+		
+		frame = new JFrame("Settings");    
     
         initFrame();
 		
@@ -129,7 +129,7 @@ public class Settings {
 		frame.setVisible(false);
 		frame.removeAll();
 		frame.dispose();
-		panel.removeAll();
+
 	}
 	
 	public static void addButton(SettingsButton s) {
