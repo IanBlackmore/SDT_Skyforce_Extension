@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 
 import farisa_bullet.Bullet;
 import farisa_enemies.Enemy;
@@ -26,7 +27,7 @@ public class Settings {
     private static JFrame frame;
 	static boolean exitSettings = false;
 	private static ArrayList <SettingsButton> buttonList;
-	private static JPanel panel = new JPanel();
+	private static JPanel panel;
     
 	public static void setPlayerColour(Color c) {
 		playerColour = c;
@@ -67,9 +68,8 @@ public class Settings {
 		Bullet.setColour(bulletColour);
 	}
 	
-	public static void render() {
-		frame = new JFrame("Settings");
-		JButton exitButton = new JButton("Exit Settings Menu");
+	
+	public static void init() {
 		buttonList = new ArrayList<SettingsButton>();
 		SettingsButton playerColour = new SetPlayerColourButton();
 		SettingsButton bulletColour = new SetBulletColourButton();
@@ -79,6 +79,14 @@ public class Settings {
 		buttonList.add(bulletColour);
 		buttonList.add(backgroundColour);
 		buttonList.add(enemyColour);
+		panel = new JPanel();
+	}
+	
+	public static void render() {
+		
+		frame = new JFrame("Settings");
+		JButton exitButton = new JButton("Exit Settings Menu");
+		
         exitButton.setBounds(100, 100, 200, 100);
         exitButton.addActionListener(new ActionListener() {
         	@Override
@@ -87,31 +95,26 @@ public class Settings {
                 exitButtonClicked(e);
             }
         });
-        addAllButtonsToFrame();
-        panel.add(exitButton);
+        
+  
+        
+		addAllButtonsToFrame();
+		panel.add(exitButton);
+    
+    
         initFrame();
-        
-        
-        
-        //frame.pack();
-		do {	        
-			// THIS IS A LOAD BEARING PRINT STATEMENT
-			// I DO NOT KNOW WHY
-			System.out.print("");
-		} while(!exitSettings);
-		applySettings();
-		frame.setVisible(false);
-		frame.dispose();
 		
 	}
 	
 	private static void initFrame() {
+		
         frame.setSize(500,500);
         frame.setVisible(true);//makes sure the visibility of the frame
         frame.setLocationRelativeTo(null);//makes the frame appear in the middle of the screen
         frame.setResizable(false);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);//application closes if the frame is closed
         frame.add(panel);
+        
         /*Canvas canvas = new Canvas();
         canvas.setPreferredSize(new Dimension(500,500));
         canvas.setBackground(Color.gray);//Set full frame color
@@ -122,17 +125,29 @@ public class Settings {
 	}
 	
 	private static void exitButtonClicked(ActionEvent e) {
-		exitSettings = true;
+		applySettings();
+		frame.setVisible(false);
+		frame.removeAll();
+		frame.dispose();
+		panel.removeAll();
 	}
 	
 	public static void addButton(SettingsButton s) {
 		buttonList.add(s);
+
 	}
 	
 	private static void addAllButtonsToFrame() {
+		
 		for (int i = 0; i < buttonList.size(); i++) {
 			panel.add(buttonList.get(i).getButton());
 		}
 	}
+	
+	public static void addTextToPanel(JTextField t) {
+		panel.add(t);
+	}
+	
+	
 	
 }

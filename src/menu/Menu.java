@@ -12,7 +12,6 @@ public class Menu {
     private JFrame frame;
     private JPanel mainPanel;
     private CardLayout cardLayout;
-
     public Menu() {
         frame = new JFrame("SkyForce");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -21,11 +20,11 @@ public class Menu {
 
         cardLayout = new CardLayout();
         mainPanel = new JPanel(cardLayout);
-
         initializeMainMenu();
     }
 
     private void initializeMainMenu() {
+    	
         JPanel menuPanel = new JPanel();
         menuPanel.setLayout(new BoxLayout(menuPanel, BoxLayout.Y_AXIS));
         

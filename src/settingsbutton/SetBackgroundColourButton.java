@@ -10,9 +10,11 @@ import javax.swing.JButton;
 import settings.Settings;
 
 public class SetBackgroundColourButton implements SettingsButton {
-	JButton button;
-	ArrayList <Color> colourList = new ArrayList <Color>();
-	int currentColour;
+	private JButton button;
+	private ArrayList <Color> colourList = new ArrayList <Color>();
+	private int currentColour;
+	
+	
 	
 	public SetBackgroundColourButton() {
 		button = new JButton("Set Background Colour");
@@ -22,6 +24,13 @@ public class SetBackgroundColourButton implements SettingsButton {
 		colourList.add(Color.black);
 		colourList.add(Color.white);
 		button.setBounds(300, 300, 100, 100);
+		button.addActionListener(new ActionListener() {
+        	@Override
+            public void actionPerformed(ActionEvent e)
+            {
+                execute();
+            }
+        });
 	}
 	
 	@Override
@@ -34,14 +43,6 @@ public class SetBackgroundColourButton implements SettingsButton {
 
 	@Override
 	public JButton getButton() {
-		
-		button.addActionListener(new ActionListener() {
-        	@Override
-            public void actionPerformed(ActionEvent e)
-            {
-                execute();
-            }
-        });
 		return button;
 	}
 	@Override

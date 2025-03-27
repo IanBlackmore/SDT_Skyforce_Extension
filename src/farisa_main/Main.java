@@ -7,10 +7,12 @@ package farisa_main;
 
 //import farisa_setUp.gameSetUp;
 import menu.Menu;
+import settings.Settings;
 
 public class Main {
 
     public static void main(String[] args) {
+    	Settings.init();
         Menu menu = new Menu(); // main menu logic
         menu.show(); // display the menu
 

@@ -9,6 +9,8 @@ import farisa_display.Display;
 import settings.Settings;
 import farisa_graphics.loadImage;
 import farisa_manager.gameManager;
+import menu.Menu;
+
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
@@ -47,14 +49,12 @@ public class gameSetUp implements Runnable{
         
     }
     public void init(){//initialize
-    	
-    	//Settings.render();
         display = new Display(title,width,height);
         loadImage.init();
         manager = new gameManager();
         manager.init();
         //start = true;  
-        //Settings.render();
+
         
         
         

@@ -10,9 +10,9 @@ import javax.swing.JButton;
 import settings.Settings;
 
 public class SetEnemyColourButton implements SettingsButton {
-	JButton button;
-	ArrayList <Color> colourList = new ArrayList <Color>();
-	int currentColour;
+	private JButton button;
+	private ArrayList <Color> colourList = new ArrayList <Color>();
+	private int currentColour;
 	
 	public SetEnemyColourButton() {
 		button = new JButton("Set Enemy Colour");
@@ -22,6 +22,13 @@ public class SetEnemyColourButton implements SettingsButton {
 		colourList.add(Color.black);
 		colourList.add(Color.red);
 		button.setBounds(300, 300, 100, 100);
+		button.addActionListener(new ActionListener() {
+        	@Override
+            public void actionPerformed(ActionEvent e)
+            {
+                execute();
+            }
+        });
 	}
 	
 	@Override
@@ -35,13 +42,6 @@ public class SetEnemyColourButton implements SettingsButton {
 	@Override
 	public JButton getButton() {
 		
-		button.addActionListener(new ActionListener() {
-        	@Override
-            public void actionPerformed(ActionEvent e)
-            {
-                execute();
-            }
-        });
 		return button;
 	}
 	@Override
