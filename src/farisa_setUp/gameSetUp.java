@@ -12,6 +12,7 @@ import farisa_manager.gameManager;
 import menu.Menu;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
 import java.util.logging.Level;
@@ -106,6 +107,13 @@ public class gameSetUp implements Runnable{
         g.fillRect(50, 50, gameWidth, gameHeight);
         //g.drawImage(loadImage.image, 50, 50, gameWidth, gameHeight,null);
         manager.render(g);//after the creation of rectangle so entity shows on the rectangle
+        
+        // instructions
+        g.setColor(Color.white); // set text color to white
+        g.setFont(new Font("Arial", Font.PLAIN, 15)); // Arial font, plain style, size 15
+        g.drawString("Use Left and Right Arrow Keys to move", 10, 20); // position (x: 20, y: 20)
+        g.drawString("Use Spacebar to shoot bullets", 10, 40); // position (x: 20, y: 20)
+
         
         //end of draw
         buffer.show();
