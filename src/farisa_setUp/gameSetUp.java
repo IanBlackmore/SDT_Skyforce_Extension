@@ -112,8 +112,8 @@ public class gameSetUp implements Runnable, KeyListener {
         // instructions
         g.setColor(Color.white); // set text color to white
         g.setFont(new Font("Arial", Font.PLAIN, 15)); // Arial font, plain style, size 15
-        g.drawString("Use Left and Right Arrow Keys to move", 10, 20); // position (x: 20, y: 20)
-        g.drawString("Use Spacebar to shoot bullets", 10, 40); // position (x: 20, y: 20)
+        g.drawString("Use Left and Right Arrow Keys to move", 100, 20); // position (x: 20, y: 20)
+        g.drawString("Use Spacebar to shoot bullets", 100, 40); // position (x: 20, y: 20)
 
         
         //end of draw
