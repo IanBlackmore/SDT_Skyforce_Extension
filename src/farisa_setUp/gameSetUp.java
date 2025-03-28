@@ -13,6 +13,7 @@ import farisa_manager.gameManager;
 import menu.Menu;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
 import java.util.logging.Level;
@@ -25,17 +26,8 @@ import java.awt.event.KeyListener;
  *
  * @author Mehedi Hasan Akash
  */
-//package farisa_setUp;
-
-import farisa_display.Display;
-import farisa_manager.gameManager;
-import java.awt.Color;
-import java.awt.Graphics;
-import java.awt.image.BufferStrategy;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
-
 public class gameSetUp implements Runnable, KeyListener {
+  
     private String title;
     private int width, height;
     private boolean running, paused;
@@ -77,7 +69,7 @@ public class gameSetUp implements Runnable, KeyListener {
             thread.start();
         }
     }
-
+  
     public synchronized void stop() {
         if (!running) return;
         running = false;
@@ -86,7 +78,7 @@ public class gameSetUp implements Runnable, KeyListener {
         g.dispose();
         System.exit(0);
     }
-
+  
     public void togglePause() {
         paused = !paused;
         if (paused) {
@@ -95,14 +87,13 @@ public class gameSetUp implements Runnable, KeyListener {
             manager.restoreState(caretaker.restoreState()); // Restore game state
         }
     }
-
+  
     public void tick() {
         if (!paused) manager.tick();
         if (manager.getExit()) stop();
     }
-
-    public void renderGame()//running 
-    {
+  
+    public void renderGame(){//draw stuffs for game screen
         buffer = display.getCanvas().getBufferStrategy();
         if (buffer == null) {
             display.getCanvas().createBufferStrategy(3);
@@ -110,10 +101,22 @@ public class gameSetUp implements Runnable, KeyListener {
         }
 
         g = buffer.getDrawGraphics();
-        g.clearRect(0, 0, width, height);
+        g.clearRect(0, 0, width, height);//x, y, width, height
+        //draw
+      
         g.setColor(backgroundColour);
         g.fillRect(50, 50, gameWidth, gameHeight);
-        manager.render(g);
+        //g.drawImage(loadImage.image, 50, 50, gameWidth, gameHeight,null);
+        manager.render(g);//after the creation of rectangle so entity shows on the rectangle
+        
+        // instructions
+        g.setColor(Color.white); // set text color to white
+        g.setFont(new Font("Arial", Font.PLAIN, 15)); // Arial font, plain style, size 15
+        g.drawString("Use Left and Right Arrow Keys to move", 10, 20); // position (x: 20, y: 20)
+        g.drawString("Use Spacebar to shoot bullets", 10, 40); // position (x: 20, y: 20)
+
+        
+        //end of draw
         buffer.show();
         g.dispose();
     }
@@ -136,8 +139,7 @@ public class gameSetUp implements Runnable, KeyListener {
         buffer.show();
         g.dispose();
     }
-
-    
+  
     @Override
     public void run() {
         init();
