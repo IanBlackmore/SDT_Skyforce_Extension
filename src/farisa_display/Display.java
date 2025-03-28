@@ -14,6 +14,7 @@ import javax.swing.WindowConstants;
 
 import java.awt.Canvas;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.event.WindowAdapter;
 
@@ -54,5 +55,10 @@ public class Display {
     public Canvas getCanvas(){//get method to use private Canvas veriable in other class
         return canvas;
     }
+
+	public Component getFrame() {
+		// TODO Auto-generated method stub
+		return frame;
+	}
     
 }
