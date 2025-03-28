@@ -15,6 +15,9 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 
 /**
  *
@@ -30,7 +33,10 @@ public class Player implements KeyListener {
     private boolean fire;
     private long current;//for bullet time
     private long delay;
-    private int health;
+    //private int health;
+    
+    private List<Integer> lives; // List to store lives
+
     
     private static Color playerColour = Color.red;
 	private boolean exit = false;
@@ -40,24 +46,32 @@ public class Player implements KeyListener {
         this.x = x;
         this.y = y;
         
+        lives = new ArrayList<>();
+        for (int i = 0; i < 3; i++) {
+            lives.add(i);
+        }
+
     }
     
     public void init(){
         Display.frame.addKeyListener(this);
         current = System.nanoTime();//puts game's current time
         delay = 100; //1 parcent of a second
-        health = 3;
+        //health = 3;
+        
     }
     public void tick(){//player movement
-        if(!(health<=0)){
-            if(left){
-            if(x >= 55){
-            x -= 5;
+        if(!lives.isEmpty()){
+            if(left)
+            {
+	            if(x >= 55){
+	            x -= 5;
             }
         }
-        if(right){
+        if(right)
+        {
             if(x <= 445-playerWidth){
-            x += 5;
+            	x += 5;
             }
         }
         if(fire){
@@ -70,7 +84,7 @@ public class Player implements KeyListener {
         }
     }
     public void render(Graphics g){
-        if(!(health<=0)){
+        if(!lives.isEmpty()){
         g.setColor(playerColour);
         g.fillRect(x, y, playerWidth, playerHeight);
     }
@@ -118,12 +132,23 @@ public class Player implements KeyListener {
     public int getY(){
         return y;
     }
-    public int getHealth(){
-        return health;
+    
+    public Iterator<Integer> getLivesIterator() {
+        return lives.iterator();
     }
-    public void setHealth(int health){//setter method to set value of health from other classes
-        this.health = health;
+
+    public void loseLife() {
+        if (!lives.isEmpty()) {
+            lives.remove(lives.size() - 1);
+        }
+        System.out.println("Lives remaining: " + lives.size());
+
     }
+    
+    public void setLives(List<Integer> lives) {
+        this.lives = new ArrayList<>(lives);
+    }
+    //
     
     public static void setPlayerColour(Color c) {
     	playerColour = c;
