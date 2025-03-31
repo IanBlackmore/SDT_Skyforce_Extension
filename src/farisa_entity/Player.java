@@ -23,6 +23,7 @@ import java.util.List;
  *
  * @author Mehedi Hasan Akash
  */
+
 public class Player implements KeyListener {
     private int x;
     private int y;
@@ -31,16 +32,12 @@ public class Player implements KeyListener {
     private boolean left;
     private boolean right;
     private boolean fire;
-    private long current;//for bullet time
+    private long current;
     private long delay;
-    //private int health;
     
-    private List<Integer> lives; // List to store lives
-
-    
+    private List<Integer> lives;
     private static Color playerColour = Color.red;
-	private boolean exit = false;
-    
+    private boolean exit = false;
     
     public Player(int x, int y){
         this.x = x;
@@ -50,110 +47,102 @@ public class Player implements KeyListener {
         for (int i = 0; i < 3; i++) {
             lives.add(i);
         }
-
     }
     
     public void init(){
         Display.frame.addKeyListener(this);
-        current = System.nanoTime();//puts game's current time
-        delay = 100; //1 parcent of a second
-        //health = 3;
-        
+        current = System.nanoTime();
+        delay = 100;
     }
-    public void tick(){//player movement
-        if(!lives.isEmpty()){
-            if(left)
-            {
-	            if(x >= 55){
-	            x -= 5;
+
+    public void tick() {
+        if (hasLives()) {
+            if (left && x >= 55) {
+                x -= 5;
+            }
+            if (right && x <= 445 - playerWidth) {
+                x += 5;
+            }
+            if (fire) {
+                long breaks = (System.nanoTime() - current) / 1000000;
+                if (breaks > delay) {
+                    gameManager.bullet.add(new Bullet(x + (playerWidth / 2) - (bulletWidth / 2), y));
+                }
+                current = System.nanoTime();
             }
         }
-        if(right)
-        {
-            if(x <= 445-playerWidth){
-            	x += 5;
-            }
-        }
-        if(fire){
-            long breaks = (System.nanoTime()-current)/1000000;//different time subtracts from old time and divide by one milion
-            if(breaks > delay){
-            gameManager.bullet.add(new Bullet(x+(playerWidth/2)-(bulletWidth/2),y));//to fire bullet from player's top
-            }
-            current = System.nanoTime();//current becomes new time
-        }
+    }
+
+    public void render(Graphics g) {
+        if (hasLives()) {
+            g.setColor(playerColour);
+            g.fillRect(x, y, playerWidth, playerHeight);
         }
     }
-    public void render(Graphics g){
-        if(!lives.isEmpty()){
-        g.setColor(playerColour);
-        g.fillRect(x, y, playerWidth, playerHeight);
-    }
-    }
-    
-    public void keyPressed(KeyEvent e){// to get codes of pressed key
+
+    public void keyPressed(KeyEvent e) {
         int source = e.getKeyCode();
-        // I am annoyed that I have to use arrow keys. I'm changing this
-        if(source == KeyEvent.VK_LEFT || source == KeyEvent.VK_A){
+        if (source == KeyEvent.VK_LEFT || source == KeyEvent.VK_A) {
             left = true;
         }
-        if(source == KeyEvent.VK_RIGHT || source == KeyEvent.VK_D){
+        if (source == KeyEvent.VK_RIGHT || source == KeyEvent.VK_D) {
             right = true;
         }
-        if(source == KeyEvent.VK_SPACE){//to fire
+        if (source == KeyEvent.VK_SPACE) {
             fire = true;
         }
-        // added exit condition because I felt like it
-        if(source == KeyEvent.VK_ESCAPE){
-            exit  = true;
+        if (source == KeyEvent.VK_ESCAPE) {
+            exit = true;
         }
-        
     }
-    public void keyReleased(KeyEvent e){
+
+    public void keyReleased(KeyEvent e) {
         int source = e.getKeyCode();
-        // see keyPressed() for why this got changed too
-        if(source == KeyEvent.VK_LEFT || source == KeyEvent.VK_A){
+        if (source == KeyEvent.VK_LEFT || source == KeyEvent.VK_A) {
             left = false;
         }
-        if(source == KeyEvent.VK_RIGHT || source == KeyEvent.VK_D){
+        if (source == KeyEvent.VK_RIGHT || source == KeyEvent.VK_D) {
             right = false;
         }
-        if(source == KeyEvent.VK_SPACE){//to stop firing
+        if (source == KeyEvent.VK_SPACE) {
             fire = false;
         }
-        
     }
-    public void keyTyped(KeyEvent e){
-    	
-    }
-    
-    public int getX(){
+
+    public void keyTyped(KeyEvent e) {}
+
+    public int getX() {
         return x;
     }
-    public int getY(){
+
+    public int getY() {
         return y;
     }
-    
+
     public Iterator<Integer> getLivesIterator() {
         return lives.iterator();
     }
 
     public void loseLife() {
-        if (!lives.isEmpty()) {
+        if (hasLives()) {
             lives.remove(lives.size() - 1);
         }
         System.out.println("Lives remaining: " + lives.size());
-
     }
-    
+
+    public boolean hasLives() {
+        return !lives.isEmpty();
+    }
+
     public void setLives(List<Integer> lives) {
         this.lives = new ArrayList<>(lives);
     }
-    //
-    
+
     public static void setPlayerColour(Color c) {
-    	playerColour = c;
+        playerColour = c;
     }
+
     public boolean getExit() {
-    	return exit;
+        return exit;
     }
 }

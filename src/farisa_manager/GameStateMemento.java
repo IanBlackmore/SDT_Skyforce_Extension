@@ -18,12 +18,20 @@ public class GameStateMemento {
         while (iterator.hasNext()) {
             this.playerLives.add(iterator.next());
         }
-        this.savedBullets = new ArrayList<>(bullets); // Deep copy bullets
-        this.savedEnemies = new ArrayList<>(enemies); // Deep copy enemies
+        this.savedBullets = new ArrayList<>(bullets);
+        this.savedEnemies = new ArrayList<>(enemies);
     }
 
-    public List<Integer> getPlayerLives() { return new ArrayList<>(playerLives); }
-    public ArrayList<Bullet> getSavedBullets() { return new ArrayList<>(savedBullets); }
-    public ArrayList<Enemy> getSavedEnemies() { return new ArrayList<>(savedEnemies); }
+    public List<Integer> getPlayerLives() {
+        return new ArrayList<>(playerLives);
+    }
+
+    public ArrayList<Bullet> getSavedBullets() {
+        return new ArrayList<>(savedBullets);
+    }
+
+    public ArrayList<Enemy> getSavedEnemies() {
+        return new ArrayList<>(savedEnemies);
+    }
 }
 
